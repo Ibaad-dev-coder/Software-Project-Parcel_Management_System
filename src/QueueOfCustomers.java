@@ -5,28 +5,42 @@ public class QueueOfCustomers {
     private List<Customer> customerList;
     private List<Customer> collectedList;
     private int queueNo = 1;
-    private boolean status = true;
+    private String compositeKey;
+    private Log log = Log.getInstance();
+
 
 
     public QueueOfCustomers() {
         this.customerList = new ArrayList<>();
         this.collectedList = new ArrayList<>();
+        log.addEntry("Waiting Queue for Customers created:");
+        log.addEntry("Collected List for Customers created:");
+
+    }
+
+    public void generateCompositeKey(Customer customer) {
+        compositeKey = customer.getSurname()+"_"+customer.getParcelID();
+    }
+
+    public String getCompositeKey() {
+        return compositeKey;
     }
 
     public void addCustomer(Customer customer) {
         customerList.add(customer);
-        customer.setQueueNumber(queueNo);
-        status = true;
-        customer.setQueueNumber(queueNo);
-        customer.setStatus(status);
+        customer.setQueueNo(queueNo);
+        log.addEntry("Customer added to waiting queue: " + customer.getCustomerName());
+        customer.setStatus("Queued up for collection");
         queueNo++;
     }
 
     public void moveCustomerToCollected(Customer customer) {
         if (customerList.contains(customer)) {
             customerList.remove(customer); // Remove from waiting list
-            customer.setStatus(false); // Set status to collected
+            customer.setStatus("Collected their parcel"); // Set status to collected
             collectedList.add(customer); // Add to collected list
+            log.addEntry("Customer moved to collected queue: " + customer.getCustomerName());
+
         }
     }
 
@@ -35,7 +49,7 @@ public class QueueOfCustomers {
     }
 
     // Get the collected list
-    public List<Customer> getCollectedList() {
+    public List<Customer> getCollectedQueue() {
         return collectedList;
     }
 
@@ -48,11 +62,18 @@ public class QueueOfCustomers {
     }
 
     // Print the collected list
-    public void printCollectedList() {
+    public void printCollectedQueue() {
         System.out.println("Collected List:");
         for (Customer c : collectedList) {
             System.out.println(c);
         }
+    }
+
+    public void delWaitingQueue() {
+        this.getWaitingQueue().clear();
+    }
+    public void delCollectedQueue() {
+        this.getCollectedQueue().clear();
     }
 
 }

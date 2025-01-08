@@ -15,6 +15,7 @@ public class Manager {
     private QueueOfCustomers queue;
 
 
+
     public Manager(ParcelMap parcelMap, QueueOfCustomers queue) {
         this.parcelMap = parcelMap;
         this.queue = queue;
@@ -202,5 +203,12 @@ public class Manager {
         }
         return queue;
     }
+
+    public static void main(String[] args) {
+        new parcelView();
+        Log log = Log.getInstance();
+        log.getLog();
+    }
+
 }
 

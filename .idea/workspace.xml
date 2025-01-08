@@ -4,12 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a887933e-6956-4a1b-8333-c8af1c259012" name="Changes" comment="Initial Classes setup Commit">
+    <list default="true" id="a887933e-6956-4a1b-8333-c8af1c259012" name="Changes" comment="3rd Commit (Defined more Parcel and ParcelMap Methods and Manager Class">
+      <change afterPath="$PROJECT_DIR$/src/ParcelSystemController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/parcelView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Log.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Log.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parcel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parcel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ParcelMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ParcelMap.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/QueueOfCustomers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/QueueOfCustomers.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Worker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Worker.java" afterDir="false" />
     </list>
@@ -63,7 +64,21 @@
       <option name="project" value="LOCAL" />
       <updated>1735992002434</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="2nd Commit (Defined basic methods and toString() methods">
+      <created>1736291007236</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1736291007236</updated>
+    </task>
+    <task id="LOCAL-00003" summary="3rd Commit (Defined more Parcel and ParcelMap Methods and Manager Class">
+      <created>1736324767425</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1736324767426</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -79,6 +94,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial Classes setup Commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial Classes setup Commit" />
+    <MESSAGE value="2nd Commit (Defined basic methods and toString() methods" />
+    <MESSAGE value="3rd Commit (Defined more Parcel and ParcelMap Methods and Manager Class" />
+    <option name="LAST_COMMIT_MESSAGE" value="3rd Commit (Defined more Parcel and ParcelMap Methods and Manager Class" />
   </component>
 </project>
