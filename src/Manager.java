@@ -10,14 +10,21 @@ public class Manager {
     private ArrayList<String[]> pStorage;
     private ArrayList<String[]> cStorage;
     private String[] nameParts;
+    private Log log = Log.getInstance();
+    private ParcelMap parcelMap;
+    private QueueOfCustomers queue;
 
-    public Manager() {
+
+    public Manager(ParcelMap parcelMap, QueueOfCustomers queue) {
+        this.parcelMap = parcelMap;
+        this.queue = queue;
         this.managerId = managerId;
         this.managerName = managerName;
         this.employeeList = new ArrayList<>();
         this.taskList = new ArrayList<>();
         this.pStorage = new ArrayList<>();
         this.cStorage = new ArrayList<>();
+        log.addEntry("Manager created.");
 
 
     }
@@ -29,6 +36,7 @@ public class Manager {
 
 
     public void makeDummies() {
+        log.addEntry("Creating dummy data...");
         try (BufferedReader pReader = new BufferedReader(new FileReader(mainParcel));
              BufferedWriter pWriter = new BufferedWriter(new FileWriter(dummyParcel));
              BufferedReader cReader = new BufferedReader(new FileReader(mainCusts));
@@ -54,9 +62,10 @@ public class Manager {
     }
 
 
-    public ArrayList<String[]> pStoring() {
+    public ArrayList<String[]> pStoring(File file) {
 
-        try (BufferedReader dummyPReader = new BufferedReader(new FileReader(dummyParcel))) {
+
+        try (BufferedReader dummyPReader = new BufferedReader(new FileReader(file))) {
 
             String line;
             while ((line = dummyPReader.readLine()) != null) {
@@ -71,9 +80,14 @@ public class Manager {
         return pStorage;
     }
 
-    public ArrayList<String[]> cStoring() {
+    public ArrayList<String[]> getpStorage() {
+        return this.pStorage;
+    }
 
-        try (BufferedReader dummyCReader = new BufferedReader(new FileReader(dummyCusts))) {
+    public ArrayList<String[]> cStoring(File file) {
+
+
+        try (BufferedReader dummyCReader = new BufferedReader(new FileReader(file))) {
 
             String line;
             while ((line = dummyCReader.readLine()) != null) {
@@ -89,43 +103,104 @@ public class Manager {
         return cStorage;
     }
 
+    public ArrayList<String[]> getcStorage(){
+        return this.cStorage;
+    }
+
 
     public ParcelMap parcelInstantiation(ParcelMap parcelMap) {
+        log.addEntry("Initializing parcels...");
 
 
         for (String[] x : pStorage) {
-            String parcelID = x[0];
-            int days = Integer.parseInt(x[5]);
-            double weight = Double.parseDouble(x[1]);
-            String dimensions = String.join(" ", x[2], x[3], x[4]);
-            String surname = "";
-
-            for (String[] y: cStorage){
-                nameParts = y[0].split(" ");
-                if(y[1].equals(x[0])) {
-                    surname = nameParts[1];
-                    break;
-                }
+            if (x.length == 7) {
+                String parcelID = x[0];
+                double weight = Double.parseDouble(x[1]);
+                String dimensions = String.join(" ", x[2], x[3], x[4]);
+                int days = Integer.parseInt(x[5]);
+                String surname = x[6];
+                Parcel parcel = new Parcel(parcelID, weight, dimensions, days, surname);
+                parcelMap.addParcel(parcel);
+                log.addEntry("Parcel Instantiated successfully!");
+            } else {
+                System.out.println("Invalid Format. Try again");
+                log.addEntry("Invalid Format. Try again");
             }
-
-            Parcel parcel = new Parcel(parcelID, weight, dimensions, days, true, surname);
-            parcelMap.addParcel(parcel);
         }
 
         return parcelMap;
     }
 
-    public QueueOfCustomers customerInstantiation(QueueOfCustomers queue) {
-
-        for (String[] x : cStorage) {
-            String FullName = x[0];
-            String parcelID = x[1];
-            Customer customer = new Customer(FullName,parcelID);
-            queue.addCustomer(customer);
+    public ParcelMap singleParcelForFileInstantiation(ParcelMap parcelMap, String[] x) {
+        if (x.length == 7){
+            String parcelID = x[0];
+            double weight = Double.parseDouble(x[1]);
+            String dimensions = String.join(" ", x[2], x[3], x[4]);
+            int days = Integer.parseInt(x[5]);
+            String surname = x[6];
+            Parcel parcel = new Parcel(parcelID, weight, dimensions, days, surname);
+            parcelMap.addParcel(parcel);
+            log.addEntry("Parcel Instantiated successfully!");
 
         }
-        return queue;
-
+        else {
+            System.out.println("Invalid Format. Try again");
+            log.addEntry("Invalid Format. Try again");
+        }
+        return parcelMap;
     }
 
+    public ParcelMap singleParcelInputInstantiation(ParcelMap parcelMap, String[] x) {
+        if (x.length == 5){
+            String parcelID = x[0];
+            double weight = Double.parseDouble(x[1]);
+            String dimensions = x[2];
+            int days = Integer.parseInt(x[3]);
+            String surname = x[4];
+            Parcel parcel = new Parcel(parcelID, weight, dimensions, days, surname);
+            parcelMap.addParcel(parcel);
+            log.addEntry("Parcel Instantiated successfully!");
+
+        }
+        else {
+            System.out.println("Invalid Format. Try again");
+            log.addEntry("Invalid Format. Try again");
+        }
+        return parcelMap;
+    }
+
+    public QueueOfCustomers customerInstantiation(QueueOfCustomers queue) {
+        log.addEntry("Initializing customers...");
+
+        for (String[] x : cStorage) {
+            if (x.length == 2) {
+                String FullName = x[0];
+                String parcelID = x[1];
+                Customer customer = new Customer(FullName, parcelID);
+                queue.addCustomer(customer);
+                log.addEntry("Customer Instantiated successfully!");
+            } else {
+                System.out.println("Invalid Format. Try again");
+                log.addEntry("Invalid Format. Try again");
+            }
+        }
+        return queue;
+    }
+
+
+    public QueueOfCustomers singleCustomerInstantiation(QueueOfCustomers queue, String[] x) {
+        if (x.length == 2) {
+            String FullName = x[0];
+            String parcelID = x[1];
+            Customer customer = new Customer(FullName, parcelID);
+            queue.addCustomer(customer);
+            log.addEntry("Customer Instantiated successfully!");
+
+        } else {
+            System.out.println("Invalid Format. Try again");
+            log.addEntry("Invalid Format. Try again");
+        }
+        return queue;
+    }
 }
+
